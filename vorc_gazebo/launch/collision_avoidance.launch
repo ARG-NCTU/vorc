@@ -3,7 +3,7 @@
   <env name="ROSCONSOLE_CONFIG_FILE" value="$(find vrx_gazebo)/config/custom_rosconsole.conf"/>
   
   <!-- Gazebo world to load -->
-  <arg name="world" default="$(find vrx_gazebo)/worlds/collision_avoidance_forest.world" />
+  <arg name="world" default="$(find vorc_gazebo)/worlds/collision_avoidance.world" />
   
   <!-- If true, run gazebo GUI -->
   <arg name="gui" default="true" />
