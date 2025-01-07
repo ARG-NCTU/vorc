@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="veh" default="cora"/>
+  
+  <arg name="use_joy" default="true"/>
+  <arg name="use_namespace" default="false"/>
+
+  <!-- Conditionally launch the Joy node -->
+  <group if="$(arg use_joy)">
+    <node pkg="joy" type="joy_node" name="joy">
+      <remap from="/joy" to="/$(arg veh)/joy" if="$(arg use_namespace)"/>
+      <param name="dev" value="/dev/input/js0"/>
+      <param name="autorepeat_rate" value="10"/>
+    </node>
+  </group>
+  
+  <!-- Convert Twist messages to Drive messages -->
+  <node ns="$(arg veh)" pkg="vorc_gazebo" type="twist2thrust_t.py" name="twist2thrust" output="screen">
+    <remap from="/joy" to="/$(arg veh)/joy" if="$(arg use_namespace)"/>
+    <remap from="left_cmd" to="/$(arg veh)/thrusters/left_thrust_cmd"/>
+    <remap from="right_cmd" to="/$(arg veh)/thrusters/right_thrust_cmd"/>
+  </node>
+  
+</launch>
+
