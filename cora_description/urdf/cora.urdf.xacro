@@ -51,16 +51,16 @@ a circle segment. The value for the draft is consistent specifications of simila
   </link>
 
   <!-- Add collision sensor to base_link -->
-  <gazebo reference="cora/base_link">
+  <gazebo reference="cora/dummy_link">
     <sensor type="contact" name="collision_sensor">
       <always_on>true</always_on>
-      <update_rate>100.0</update_rate>
+      <update_rate>500.0</update_rate>
       <contact>
-        <collision>cora/base_link_fixed_joint_lump__dummy_link_collision</collision>
+        <collision>cora/dummy_link::collision</collision>
       </contact>
       <plugin name="gazebo_ros_bumper" filename="libgazebo_ros_bumper.so">
-        <bumperTopicName>cora/collision_sensor_states</bumperTopicName>
-        <frameName>world</frameName>
+        <bumperTopicName>cora/sensors/collision</bumperTopicName>
+        <frameName>cora/dummy_link</frameName>
       </plugin>
     </sensor>
   </gazebo>
