@@ -26,6 +26,8 @@
   <!-- Acoustic pinger position(s) -->
   <arg name="pinger_params" default="$(find vorc_gazebo)/config/pinger.yaml"/>
 
+  <arg name="thruster_config" default="M" />
+
   <!-- Initial USV location and attitude -->
   <arg name="x" default="0" />
   <arg name="y" default="0" />
@@ -48,9 +50,10 @@
   <arg name="urdf" default="$(find cora_description)/urdf/cora.xacro"/>
 
   <param name="$(arg namespace)/robot_description"
-         command="$(find xacro)/xacro &#x002D;&#x002D;inorder '$(arg urdf)'
-         locked:=$(arg robot_locked)
-         namespace:=$(arg namespace) "/>
+       command="$(find xacro)/xacro --inorder '$(arg urdf)'
+       locked:=$(arg robot_locked)
+       namespace:=$(arg namespace)
+       thruster_config:=$(arg thruster_config)"/>
 
   <!-- Robot State Publisher -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
